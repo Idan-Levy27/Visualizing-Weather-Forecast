@@ -2,7 +2,9 @@ import streamlit as st
 import plotly.express as px
 from backend import get_data
 
+
 # Add title, text input, slider, selectbox and subheader
+st.set_page_config(layout="wide")
 st.title("Weather Forecast For The Next Days")
 place = st.text_input("Place:")
 days = st.slider("Forecast Days", min_value=1, max_value=5,
@@ -29,5 +31,6 @@ if place:
             sky_conditions = [dict["weather"][0]["main"] for dict in filtered_data]
             image_paths = [images[condition] for condition in sky_conditions]
             st.image(image_paths, width=115)
+
     except KeyError:
-        st.error("That place does not exist!")
+        st.error("That place does not exist, please try again.")
